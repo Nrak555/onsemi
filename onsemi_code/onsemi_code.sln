@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "onsemi_code", "onsemi_code\onsemi_code.vcxproj", "{4A263118-0BB5-46FC-9144-DF3EB4BF94D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A263118-0BB5-46FC-9144-DF3EB4BF94D4}.Debug|x64.ActiveCfg = Debug|x64
+		{4A263118-0BB5-46FC-9144-DF3EB4BF94D4}.Debug|x64.Build.0 = Debug|x64
+		{4A263118-0BB5-46FC-9144-DF3EB4BF94D4}.Debug|x86.ActiveCfg = Debug|Win32
+		{4A263118-0BB5-46FC-9144-DF3EB4BF94D4}.Debug|x86.Build.0 = Debug|Win32
+		{4A263118-0BB5-46FC-9144-DF3EB4BF94D4}.Release|x64.ActiveCfg = Release|x64
+		{4A263118-0BB5-46FC-9144-DF3EB4BF94D4}.Release|x64.Build.0 = Release|x64
+		{4A263118-0BB5-46FC-9144-DF3EB4BF94D4}.Release|x86.ActiveCfg = Release|Win32
+		{4A263118-0BB5-46FC-9144-DF3EB4BF94D4}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92458238-06CC-45A7-AA77-54F21F7B3131}
+	EndGlobalSection
+EndGlobal
