@@ -138,47 +138,7 @@ template <class T> class list
 			}
 			return -1;						//did not find item
 		}
-		node* slice(int num1, int num2) {
-			int j = num1;
-			int k = num2;
-			node<T>* NodeS = head;	// Start node and End node
-			node<T>* NodeE;
-
-			if (num2 < num1) {					
-				std::cout << "Invaild slice";
-				return nullptr;
-			}
-
-			if (num2 > size)		// If asking for a slice Greater then array of elements bound it to last element
-				k = size;
-
-			for (int i = 0; i < j; i++)		//Find Starting node
-				NodeS = NodeS->get_next;
-
-			NodeE = NodeS;				// NodeE is after NodeS
-
-			for (int i = j; i < k; i++)	//Find Ending Node
-				NodeE = NodeE->get_next;
-
-			if(NodeS->get_last() != nullptr)	//Check if slice includes the beginning
-				NodeS->get_last()->set_next(NodeE->get_next());
-			else if (NodeE->get_next() != nullptr)	//Check if slice includes the end
-					NodeE->get_next()->set_last(nullptr);
-			
-			
-			if(NodeE->get_next() != nullptr)	//Check if slice includes the end
-				NodeE->get_next()->set_last(NodeS->get_last());
-			else if (NodeS->get_last() != nullptr)	//Check if slice includes the beginning
-				NodeS->get_last()->set_next(nullptr);
-
-			NodeS->set_last(nullptr);		//isolate the slice
-			NodeE->set_next(nullptr);
-
-			size = size - (k - j);
-
-			return NodeS;
-
-		}
+		void slice() {}
 		void mergesort() {}
 		void reverse_mergesort() {}
 
