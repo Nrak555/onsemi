@@ -73,30 +73,35 @@ template <class T> class list
 		void push(T data) {
 			node<T> *n_ptr = new node<T>(data);
 
-			n_ptr->set_last(tail);
-
-			if (tail != nullptr && head != nullptr)	//Check if empty list
+			if (tail == nullptr && head == nullptr) {	//list is empty 
+				head = n_ptr;
+				tail = n_ptr;
+			}
+			else {
+				n_ptr->set_last(tail);
 				tail->set_next(n_ptr);
-			else
-				head = n_ptr;		   //List was empty set head as well
-			tail = n_ptr;
+				tail = n_ptr;
+			}
 			size++;
 		}
 
 		T pop() {
-			T data_holder;
-			node<T>* ptr;
+			T data_holder{};
+			node<T>* ptr = nullptr;
 			
-			ptr = tail->get_last();			//get the new tail
+			if (tail != nullptr) {	//Check if list is empty
+				ptr = tail->get_last();			//get the new tail
+				data_holder = tail->get_data();	//get data
 
-			data_holder = tail->get_data();	//get data
+				delete tail;					// delete old object
+				tail = ptr;						// set new tail
+				if (tail != nullptr)
+					tail->set_next(nullptr);		// clear tail's next pointer
+				size--;
+			}
 
-			delete tail;
-			tail = ptr;						// set tail
-
-			if(ptr == nullptr)				//last item in the list set head to nullptr
-				head = ptr;
-
+				if (ptr == nullptr)				//last item in the list set head to nullptr
+					head = ptr;
 
 			return data_holder;
 		}
@@ -117,6 +122,8 @@ template <class T> class list
 			node<T>* ptr = l.head;
 
 			os << "\n\nContents of the List:\n";
+			if (l.head == nullptr)
+				return os << "List is empty";
 
 			for (int i = 0; i < l.size; i++) {
 				os << ptr->get_data() << ", ";
@@ -134,7 +141,7 @@ int main() {
 	list<int> *l = new list<int>();
 	
 	l->push(5);
-	l->push(3);
+	/*l->push(3);
 	l->push(6);
 	l->push(1);
 	l->push(2);
@@ -143,7 +150,7 @@ int main() {
 	l->push(8);
 	l->push(7);
 	l->push(9);
-	l->push(10);
+	l->push(10);*/
 
 	std::cout << l->pop();
 
