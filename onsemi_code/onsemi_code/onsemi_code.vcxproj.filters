@@ -26,9 +26,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="onsemi_code.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Linkedlist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
