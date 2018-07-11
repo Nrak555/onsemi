@@ -340,7 +340,7 @@ template <class T> class list
 
 };
 
-int main() {
+/*int main() {
 	int temp;
 	//node<int>* n;
 	list<int> *l = new list<int>();
@@ -389,4 +389,4 @@ int main() {
 	return 0;
 
 
-}
+}*/
