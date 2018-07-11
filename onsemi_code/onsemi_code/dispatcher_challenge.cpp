@@ -37,10 +37,10 @@ auto help_command = R"(
  {
   "command":"help",
   "payload": {
-    "usage":"Enter json command in 'command':'<command>','payload': { // json payload of arguments }",
+    "usage":"Enter json command in 'command':'<command>','payload': { // json payload of arguments }"
   }
  }
-)";
+)";					//There was a comma at the end of the usage that made it invalid json
 
 auto exit_command = R"(
  {
@@ -89,6 +89,8 @@ public:
     virtual ~CommandDispatcher()
     {
         // question why is it virtual? Is it needed in this case?
+		// With the dtor being virtual it suggests that commandDispatcher will undergo polymorpism.
+		// It being virtual will allow calling whatever dtor that it morphed into.
     }
 
     bool addCommandHandler(std::string command, CommandHandler handler)
@@ -116,6 +118,8 @@ private:
 
     // another gimme ...
     // Question: why delete these?
+
+	//To prevent anything from reasigning or coyping the Command dispatcher. To insure that each instance of the object is unique
 
     // delete unused constructors
     CommandDispatcher (const CommandDispatcher&) = delete;

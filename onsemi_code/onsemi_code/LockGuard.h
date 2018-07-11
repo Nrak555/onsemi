@@ -15,8 +15,8 @@ namespace custom_lock {
 				priv_mutex.unlock();
 			}
 
-			//lock_guard(lock_guard const&) = delete;
-			//lock_guard& operator=(lock_guard const&) = delete;
+			lock_guard(lock_guard const&) = delete;
+			lock_guard& operator=(lock_guard const&) = delete;
 
 		private:
 			mutex&  priv_mutex;

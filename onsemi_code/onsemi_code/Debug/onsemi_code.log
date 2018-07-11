@@ -1,2 +1,14 @@
-﻿  threading.cpp
-  onsemi_code.vcxproj -> D:\GitHub\onsemi\onsemi_code\Debug\threading.cpp.exe
+﻿  dispatcher_challenge.cpp
+d:\github\onsemi\onsemi_code\onsemi_code\dispatcher_challenge.cpp(79): error C2039: 'function': is not a member of 'std'
+  d:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\iterator(16): note: see declaration of 'std'
+d:\github\onsemi\onsemi_code\onsemi_code\dispatcher_challenge.cpp(79): error C2143: syntax error: missing ';' before '<'
+d:\github\onsemi\onsemi_code\onsemi_code\dispatcher_challenge.cpp(79): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\github\onsemi\onsemi_code\onsemi_code\dispatcher_challenge.cpp(94): error C2061: syntax error: identifier 'CommandHandler'
+d:\github\onsemi\onsemi_code\onsemi_code\dispatcher_challenge.cpp(115): error C2065: 'CommandHandler': undeclared identifier
+d:\github\onsemi\onsemi_code\onsemi_code\dispatcher_challenge.cpp(115): error C2923: 'std::map': 'CommandHandler' is not a valid template type argument for parameter '_Ty'
+d:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(79): error C2903: 'pair': symbol is neither a class template nor a function template
+d:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(79): error C3203: 'pair': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+d:\github\onsemi\onsemi_code\onsemi_code\dispatcher_challenge.cpp(115): error C2955: 'std::map': use of class template requires template argument list
+  d:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(81): note: see declaration of 'std::map'
+d:\github\onsemi\onsemi_code\onsemi_code\dispatcher_challenge.cpp(84): error C2512: 'std::map': no appropriate default constructor available
+  d:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(81): note: see declaration of 'std::map'
