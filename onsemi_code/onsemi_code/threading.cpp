@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Lock.h"
+#include "LockGuard.h"
 #include <iostream>
 #include <windows.h>
 #include <thread>
