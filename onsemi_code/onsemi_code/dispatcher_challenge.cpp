@@ -33,8 +33,10 @@ bool g_done = false;
 
 
 //
-// TEST COMMANDS
+// TEST COMMANDS 
 //
+
+// I used these as prebuilts to simplify sending the payloads
 auto help_command = R"(
  {
   "command":"help",
@@ -231,6 +233,7 @@ public:
     // ctor - need impl
     CommandDispatcher()
     {
+		command_handlers_ = new std::map<std::string, CommandHandler>;
     }
 
     // dtor - need impl
@@ -239,24 +242,32 @@ public:
         // question why is it virtual? Is it needed in this case?
 		// With the dtor being virtual it suggests that commandDispatcher will undergo polymorpism.
 		// It being virtual will allow calling whatever dtor that it morphed into.
+		delete &command_handlers_;
     }
 
     bool addCommandHandler(std::string command, CommandHandler handler)
     {
         cout << "CommandDispatcher: addCommandHandler: " << command << std::endl;
 
-        // implement
+		command_handlers_.insert_or_assign(command, handler);
 
         return true;
     }
 
-    bool dispatchCommand(std::string command_json)
-    {
-        cout << "COMMAND: " << command_json << endl;
+	bool dispatchCommand(std::string command_json, rapidjson::Value &payload)
+	{
+		cout << "COMMAND: " << command_json << endl;
 
-        // implement
+		auto item = command_handlers_.find(command_json);
+		if (item != command_handlers_.end())  //check if command was found
+		{
+			if (!item->second(payload)) //if the command fails return false
+				return false;
+		}
+		else
+			return false;				//command not found
 
-        return true;
+        return true;					//command sent
     }
 
 private:
@@ -284,16 +295,43 @@ int main()
 
     // Implement
     // add command handlers in Controller class to CommandDispatcher using addCommandHandler
+	CommandHandler hand1 = &controller.help();				//I have no way to check if that is the correct way to assign the handlers as I can't compile
+	command_dispatcher.addCommandHandler("help", hand1);
+
+	CommandHandler hand2 = &controller.exit();
+	command_dispatcher.addCommandHandler("exit", hand2);
+
+	CommandHandler hand3 = &controller.sendstring();
+	command_dispatcher.addCommandHandler("sendstring", hand3);
+
+	CommandHandler hand4 = &controller.sendbool();
+	command_dispatcher.addCommandHandler("sendbool", hand4);
+
+	CommandHandler hand5 = &controller.sendnumber();
+	command_dispatcher.addCommandHandler("sendnumber", hand5);
+
+	CommandHandler hand6 = &controller.sendarray();
+	command_dispatcher.addCommandHandler("sendarray", hand6);
+
 
 
     // gimme ...
     // command line interface
     string command;
+	string payload;
+	rapidjson::Document doc;
+
     while( ! g_done ) {
-        cout << "COMMANDS: {\"command\":\"exit\", \"payload\":{\"reason\":\"User requested exit.\"}}\n";
+        cout << "COMMANDS: {\"help\":\"exit\":\"sendstring\":\"sendbool\":\"sendnumber\":\"sendarray\"}\n";
         cout << "\tenter command : ";
         getline(cin, command);
-        command_dispatcher.dispatchCommand(command);
+		cout << "payload\":{\"reason\":\"User requested exit.\"}:{\"string\":\"TestString.\"}";
+		cout << ":{\"bool\":\"true\"}:{\"number\":\"12345.\"}:{\"array\":\"[0,1,2,3,4,5]\"}}\n";
+		cout << "\n\tenter payload : ";
+		getline(cin, payload);
+		doc.Parse(payload.c_str());
+		
+        command_dispatcher.dispatchCommand(command, doc[0] );
     }
 
     std::cout << "COMMAND DISPATCHER: ENDED" << std::endl;

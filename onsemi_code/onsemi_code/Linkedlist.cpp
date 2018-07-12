@@ -259,12 +259,13 @@ template <class T> class list
 		node<T>* merge(node<T>* first, node<T>* second) {
 			node<T>* ptr = first;
 
-			if (first == nullptr)
+			if (first == nullptr) //If first list is empty	
 				return second;
 
-			if (second == nullptr)
+			if (second == nullptr)	//If second list is empty
 				return first;
 
+			//pick the smaller value
 			if (first->get_data() < second->get_data()) {
 				first->set_next(merge(first->get_next(), second));
 				first->get_next()->set_last(first);
@@ -288,6 +289,7 @@ template <class T> class list
 			if (second == nullptr)
 				return first;
 
+			//pick the larger value
 			if (first->get_data() > second->get_data()) {
 				first->set_next(reverse_merge(first->get_next(), second));
 				first->get_next()->set_last(first);
@@ -340,7 +342,7 @@ template <class T> class list
 
 };
 
-/*int main() {
+int main() {
 	int temp;
 	//node<int>* n;
 	list<int> *l = new list<int>();
@@ -389,4 +391,4 @@ template <class T> class list
 	return 0;
 
 
-}*/
+}

@@ -42,7 +42,7 @@ void CV_thrd(int tid) {
 
 
 
-/*int main() {
+int main() {
 	int temp;
 	const int numThreads = 3;
 
@@ -75,5 +75,5 @@ void CV_thrd(int tid) {
 	std::cout << "Threads have all joined" << std::endl;
 
 	std::cin >> temp;
-}*/
+}
 	
