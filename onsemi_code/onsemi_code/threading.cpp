@@ -8,12 +8,9 @@
 
 std::mutex io_mutex;
 std::mutex cv_mutex;
-std::mutex signal_mutex;
 std::condition_variable cv;
 bool signal = false;
 int data = 0;
-
-bool signal_status() { return signal; }
 
 void thrd_func(int tid) {
 	custom_lock::lock_guard<std::mutex> lck(io_mutex);		//Lock io output to prevent overlaping messages
