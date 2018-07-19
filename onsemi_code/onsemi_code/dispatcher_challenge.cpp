@@ -295,22 +295,22 @@ int main()
 
     // Implement
     // add command handlers in Controller class to CommandDispatcher using addCommandHandler
-	CommandHandler hand1 = &controller.help();				//I have no way to check if that is the correct way to assign the handlers as I can't compile
+	CommandHandler hand1 = std::bind(controller.help, std::placeholders::_1);				//I have no way to check if that is the correct way to assign the handlers as I can't compile
 	command_dispatcher.addCommandHandler("help", hand1);
 
-	CommandHandler hand2 = &controller.exit();
+	CommandHandler hand2 = std::bind(controller.exit, std::placeholders::_1);
 	command_dispatcher.addCommandHandler("exit", hand2);
 
-	CommandHandler hand3 = &controller.sendstring();
+	CommandHandler hand3 = std::bind(controller.sendstring, std::placeholders::_1);
 	command_dispatcher.addCommandHandler("sendstring", hand3);
 
-	CommandHandler hand4 = &controller.sendbool();
+	CommandHandler hand4 = std::bind(controller.sendbool, std::placeholders::_1);
 	command_dispatcher.addCommandHandler("sendbool", hand4);
 
-	CommandHandler hand5 = &controller.sendnumber();
+	CommandHandler hand5 = std::bind(controller.sendnumber, std::placeholders::_1);
 	command_dispatcher.addCommandHandler("sendnumber", hand5);
 
-	CommandHandler hand6 = &controller.sendarray();
+	CommandHandler hand6 = std::bind(controller.sendarray, std::placeholders::_1);
 	command_dispatcher.addCommandHandler("sendarray", hand6);
 
 
