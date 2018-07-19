@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <ostream>
 #include <iostream>
+#include <chrono>
 
 template<class T> class node
 {
@@ -208,7 +209,7 @@ template <class T> class list
 			temp = head;
 
 			for (int i = 0; i < size; i++) {
-				std::cout << "\n" << i << ":" << size;
+				//std::cout << "\n" << i << ":" << size;	//debuging statement
 				temp = temp->get_next();
 			}
 			tail = temp;
@@ -219,7 +220,7 @@ template <class T> class list
 			temp = head;
 
 			for (int i = 0; i < size; i++) {
-				std::cout << "\n" << i << ":" << size;
+				//std::cout << "\n" << i << ":" << size;
 				temp = temp->get_next();
 			}
 			tail = temp;
@@ -327,17 +328,19 @@ template <class T> class list
 		{
 			node<T>* ptr = l.head;
 
+			
 			os << "\n\nContents of the List:\n";
+			os << "Size of list:" << l.get_size() << std::endl;
 			if (l.head == nullptr)
 				return os << "List is empty";
 
 			for (int i = 0; i < l.size; i++) {
 				os << ptr->get_data() << ", ";
-				if (i % 10 == 9)
+				if ((i % 10) == 9)
 					os << "\n";
 				ptr = ptr->get_next();
 			}
-			return os << "\n";
+			return os << std::endl;
 		}
 
 };
@@ -359,6 +362,7 @@ int main() {
 	l->push(7);
 	l->push(9);
 	l->push(10);
+	l->push(12);
 
 	std::cout << l->pop();
 
@@ -385,6 +389,53 @@ int main() {
 
 	l->reverse_mergesort_start();
 	std::cout << *l;
+
+	//Timing of the merge sort and reverse merge sort
+	list<int> t1, t2, t3;
+	int N_items = 1000; // upper limit
+	srand(N_items);
+
+	// init the lists 
+	for (int i = 0; i < N_items; i++) { 
+		if (i < (N_items / 100))
+			t1.push(rand());
+		if (i < (N_items / 10))
+			t2.push(rand());
+		if (i < (N_items))
+			t3.push(rand());
+	}
+
+	std::cout << t1; // merge sort comparsion to confirm it is sorting
+	auto start = std::chrono::steady_clock::now();
+	t1.mergesort_start();
+	auto end = std::chrono::steady_clock::now();
+	auto diff = end - start;
+	std::cout << t1;
+
+
+	std::cout << "\nTime taken to sort list t1:" << std::chrono::duration<double, std::milli> (diff).count() << std::endl;
+
+	start = std::chrono::steady_clock::now();
+	t2.mergesort_start();
+	end = std::chrono::steady_clock::now();
+	diff = end - start;
+
+	std::cout << "\nTime taken to sort list t2:" << std::chrono::duration<double, std::milli>(diff).count() << std::endl;
+	std::cout << t3; // merge sort comparsion to confirm it is sorting
+	start = std::chrono::steady_clock::now();
+	t3.mergesort_start();
+	end = std::chrono::steady_clock::now();
+	diff = end - start;
+	std::cout << t3;
+
+	std::cout << "\nTime taken to sort list t3:" << std::chrono::duration<double, std::milli>(diff).count() << std::endl;
+
+	start = std::chrono::steady_clock::now();
+	t3.reverse_mergesort_start();
+	end = std::chrono::steady_clock::now();
+	diff = end - start;
+
+	std::cout << "\nTime taken to reverse sort list t3 (worse case):" << std::chrono::duration<double, std::milli>(diff).count() << std::endl;
 
 	std::cin >> temp;
 
