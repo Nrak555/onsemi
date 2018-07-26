@@ -320,7 +320,6 @@ int main()
 	rapidjson::Document doc;
 	doc.SetObject();
 	rapidjson::Value *val;
-	rapidjson::Value& arraypass;
 
     while( ! g_done ) {
 		doc.SetObject();
@@ -334,12 +333,10 @@ int main()
 		
 		// Convert payload from std::String into rapidjson::Value of the appropriate type
 		if (command == "sendstring") {
-			cout << "\n sendstring";
 			val = new Value(payload.c_str(), doc.GetAllocator());
 			command_dispatcher.dispatchCommand(command, *val);
 		}
 		else if (command == "sendbool") {
-			cout << "\n sendbool";
 			if (payload == "true" || payload == "True")
 				val = new Value(true);
 			else
@@ -347,17 +344,15 @@ int main()
 			command_dispatcher.dispatchCommand(command, *val);
 		}
 		else if (command == "sendnumber") {
-			cout << "\n sendnumber";
 			val = new Value(stoi(payload, nullptr, 10));
 			command_dispatcher.dispatchCommand(command, *val);
 		}
 		else if (command == "sendarray") {
-			cout << "\n sendarry";
-			payload.insert(0, "{\"array\":\"");
-			payload.append("\"}");
+			payload.insert(0, "{\"array\":");
+			payload.append("}");
 			doc.Parse(payload.c_str());
-			arraypass = doc["array"];
-			command_dispatcher.dispatchCommand(command, arraypass);
+			val = &doc["array"];
+			command_dispatcher.dispatchCommand(command, *val);
 		}
 		else
 			cout << "\nBad Command\n";
