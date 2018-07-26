@@ -113,8 +113,6 @@ public:
     {
         cout << "Controller::exit: command: \n";
 
-		assert(payload.IsString());						//check for correct payload
-
 		rapidjson::Document doc;						//initalize Document
 		doc.Parse(exit_command);
 														//do not modify payload
@@ -320,8 +318,12 @@ int main()
     string command;
 	string payload;
 	rapidjson::Document doc;
+	doc.SetObject();
+	rapidjson::Value *val;
+	rapidjson::Value& arraypass;
 
     while( ! g_done ) {
+		doc.SetObject();
         cout << "COMMANDS: {\"help\":\"exit\":\"sendstring\":\"sendbool\":\"sendnumber\":\"sendarray\"}\n";
         cout << "\tenter command : ";
         getline(cin, command);
@@ -329,9 +331,39 @@ int main()
 		cout << ":{\"bool\":\"true\"}:{\"number\":\"12345.\"}:{\"array\":\"[0,1,2,3,4,5]\"}}\n";
 		cout << "\n\tenter payload : ";
 		getline(cin, payload);
-		doc.Parse(payload.c_str());
 		
-        command_dispatcher.dispatchCommand(command, doc[0] );
+		// Convert payload from std::String into rapidjson::Value of the appropriate type
+		if (command == "sendstring") {
+			cout << "\n sendstring";
+			val = new Value(payload.c_str(), doc.GetAllocator());
+			command_dispatcher.dispatchCommand(command, *val);
+		}
+		else if (command == "sendbool") {
+			cout << "\n sendbool";
+			if (payload == "true" || payload == "True")
+				val = new Value(true);
+			else
+				val = new Value(false);
+			command_dispatcher.dispatchCommand(command, *val);
+		}
+		else if (command == "sendnumber") {
+			cout << "\n sendnumber";
+			val = new Value(stoi(payload, nullptr, 10));
+			command_dispatcher.dispatchCommand(command, *val);
+		}
+		else if (command == "sendarray") {
+			cout << "\n sendarry";
+			payload.insert(0, "{\"array\":\"");
+			payload.append("\"}");
+			doc.Parse(payload.c_str());
+			arraypass = doc["array"];
+			command_dispatcher.dispatchCommand(command, arraypass);
+		}
+		else
+			cout << "\nBad Command\n";
+
+		delete val;					// Delete old val and make it null
+		val = nullptr;
     }
 
     std::cout << "COMMAND DISPATCHER: ENDED" << std::endl;
