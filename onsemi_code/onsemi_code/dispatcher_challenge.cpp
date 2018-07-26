@@ -326,8 +326,7 @@ int main()
         cout << "COMMANDS: {\"help\":\"exit\":\"sendstring\":\"sendbool\":\"sendnumber\":\"sendarray\"}\n";
         cout << "\tenter command : ";
         getline(cin, command);
-		cout << "payload\":{\"reason\":\"User requested exit.\"}:{\"string\":\"TestString.\"}";
-		cout << ":{\"bool\":\"true\"}:{\"number\":\"12345.\"}:{\"array\":\"[0,1,2,3,4,5]\"}}\n";
+		cout << "PAYLOAD\":{\"N/A\":\"N/A\":\"string\":\"true\":\"123\":[0,1,2,3]}";
 		cout << "\n\tenter payload : ";
 		getline(cin, payload);
 		
